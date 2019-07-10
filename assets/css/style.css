@@ -1,0 +1,16 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 15vw 70vw 15vw;
+  }
+
+div {
+    border: solid 1px silver;
+    height: 15vh;
+}
+
+.main-row {
+    height: 70vh;
+}
+
+
+
