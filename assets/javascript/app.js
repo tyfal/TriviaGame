@@ -6,7 +6,7 @@ class question {
         this.optionList = optionList;
         this.answer = answer;
         this.img = img;
-        this.correct = false;
+        this.timeleft = 10;
 
     }
 
@@ -23,33 +23,11 @@ class question {
 
         $("#triviaDiv").append(question, options);
 
-        var _self = this;
-
-        var timeleft = 5;
-
-        $("#triviaDiv").prepend("<h2 id='timeLeft'>" + timeleft + "</h2>");
-
-        var timer = setInterval(function () {
-            timeleft -= 1;
-            $("#timeLeft").text(timeleft);
-            if (timeleft <= 0) {
-                clearInterval(timer);
-                _self.timeOver();
-            }
-            $("li").on("click", function () {
-                $("li").off("click");
-                clearInterval(timer);
-                _self.judgeAnswer(this);
-            });
-        }, 1000);
-
     }
 
-    judgeAnswer(selection) {
+    judgeAnswer() {
 
-        var selectTxt = $(selection).text();
-
-        if (selectTxt === this.answer) {
+        if (this.correct) {
 
             $("#optionList").empty();
 
@@ -83,6 +61,12 @@ class question {
 
     }
 
+    decrement() {
+
+        this.timeleft --;
+
+    }
+
 }
 
 class game {
@@ -106,23 +90,23 @@ class game {
 
     questions() {
 
-        this.q1.presentQuestion();
+        var _self = this;
 
-        // for (var i = 0; i < this.qList.length; i++) {
+        var _qList = this.qList;
 
-        //     this.qList[i].presentQuestion();
+        _qList[0].presentQuestion();
 
-        //     if (this.qList[i].correct) {
+        $("#triviaDiv").prepend("<h2 id='timer'>Time Left: "+_qList[0].timeleft+"</h2>");
 
-        //         this.correctAnswer();
-
-        //     } else {
-
-        //         this.wrongAnswer();
-
-        //     }
-
-        // }
+        var timer = setInterval(function() {
+            _qList[0].decrement();
+            $("#timer").text("Time Left: "+_qList[0].timeleft);
+            if(_qList[0].timeleft === 0) {
+                clearInterval(timer);
+                $("h2").text("Time Up!");
+                
+            }
+        },1000);
 
     }
 
@@ -133,8 +117,6 @@ class game {
         $("correct").text = "Correct: " + this.correct;
 
     }
-
-
 
     wrongAnswer() {
 
