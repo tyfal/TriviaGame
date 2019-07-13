@@ -136,6 +136,13 @@ class game {
                     ++ _self.i;
                     console.log(_self.i);
                     _self.questions(_self.i);
+                } else {
+                    $("#triviaDiv").empty();
+                    $("#triviaDiv").append("<h2>Game over!</h2>\
+                    <ul><li>"+"Correct: " + _self.correct+"</li>\
+                    <li>"+"wrong: " + _self.wrong+"</li></ul>");
+                    $("#correct").empty();
+                    $("#wrong").empty();
                 }
             }
         }, 1000);
