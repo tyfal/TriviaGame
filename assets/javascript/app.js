@@ -7,6 +7,7 @@ class question {
         this.answer = answer;
         this.img = img;
         this.timeleft = 10;
+        this.correct = false;
 
     }
 
@@ -25,7 +26,11 @@ class question {
 
     }
 
-    judgeAnswer() {
+    judgeAnswer(guess) {
+
+        this.correct = (this.answer === guess);
+
+        console.log(this.correct);
 
         if (this.correct) {
 
@@ -35,8 +40,6 @@ class question {
 
             $("#triviaDiv").append(correctAnswer);
 
-            this.correct = true;
-
         } else {
 
             $("#optionList").empty();
@@ -45,9 +48,9 @@ class question {
 
             $("#triviaDiv").append(wrongAnswer);
 
-            this.correct = false;
-
         }
+
+        this.timeleft = -1;
 
     }
 
@@ -63,7 +66,7 @@ class question {
 
     decrement() {
 
-        this.timeleft --;
+        this.timeleft--;
 
     }
 
@@ -78,35 +81,64 @@ class game {
 
         this.q1 = new question("When was the first episode of Doctor Who aired?", ["1923", "1963", "1940", "1950"], "1963");
 
-        this.q2 = new question("Who was the Doctor's first companion in  the series starring David Tennant", ["Rose Tylor", "Martha Jones", "Clara Oswald", "Rory Williams"], "Rose Tyler");
+        this.q2 = new question("Who was the Doctor's first companion in  the series starring David Tennant", ["Rose Tyler", "Martha Jones", "Clara Oswald", "Rory Williams"], "Rose Tyler");
 
         this.q3 = new question("Who is the Doctor's arch nemesis?", ["The Daleks", "The Cybermen", "The Silurian", "The Master"], "The Master");
 
         this.qList = [this.q1, this.q2, this.q3];
 
-        this.questions()
+        this.i = 0;
+
+        this.questions(0);
 
     }
 
-    questions() {
+    questions(index) {
+
+        $("#triviaDiv").empty();
 
         var _self = this;
 
         var _qList = this.qList;
 
-        _qList[0].presentQuestion();
+        var _q = _qList[index];
 
-        $("#triviaDiv").prepend("<h2 id='timer'>Time Left: "+_qList[0].timeleft+"</h2>");
+        _q.presentQuestion();
 
-        var timer = setInterval(function() {
-            _qList[0].decrement();
-            $("#timer").text("Time Left: "+_qList[0].timeleft);
-            if(_qList[0].timeleft === 0) {
+        $("#triviaDiv").prepend("<h2 id='timer'>Time Left: " + _q.timeleft + "</h2>");
+
+        $("li").on("click", function () {
+            _q.judgeAnswer($(this).text());
+
+        });
+
+        var timer = setInterval(function () {
+
+            _q.decrement();
+
+            $("#timer").text("Time Left: " + _q.timeleft);
+
+            if (_q.timeleft < 1) {
                 clearInterval(timer);
-                $("h2").text("Time Up!");
+                if (_q.timeleft < 0) {
+                    $("#timer").empty();
+                } else {
+                    $("#timer").text("Time's Up!");
+                }
+
+                if (_q.correct) {
+                    _self.correctAnswer();
+                } else {
+                    _self.wrongAnswer();
+                }
                 
+                if (_self.i < _qList.length-1) {
+                    ++ _self.i;
+                    console.log(_self.i);
+                    _self.questions(_self.i);
+                }
             }
-        },1000);
+        }, 1000);
 
     }
 
@@ -114,7 +146,7 @@ class game {
 
         this.correct++;
 
-        $("correct").text = "Correct: " + this.correct;
+        $("#correct").text("Correct: " + this.correct);
 
     }
 
@@ -122,7 +154,7 @@ class game {
 
         this.wrong++;
 
-        $("wrong").text = "wrong: " + this.wrong;
+        $("#wrong").text("wrong: " + this.wrong);
 
     }
 
