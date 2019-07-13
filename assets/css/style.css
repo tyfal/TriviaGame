@@ -1,10 +1,19 @@
+body {
+  background-image: url("../images/backgroundimg.jpg");
+  font-family: 'Caudex', serif;
+  color: silver;
+  background-size: cover;
+  overflow: hidden;
+  text-shadow: 2px 2px #121213;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: 15vw 70vw 15vw;
   }
 
 div {
-    border: solid 1px silver;
+    /* border: solid 1px silver; */
     height: 15vh;
 }
 
@@ -16,6 +25,22 @@ p, h2, h3, li {
   width: 100%;
   text-align: center;
   margin: 20px 0;
+}
+
+p {
+  font-size: 25px;
+}
+
+li {
+  font-size: 25px;
+}
+
+h2 {
+  font-size: 35px;
+}
+
+h3 {
+  font-size: 35px;
 }
 
 

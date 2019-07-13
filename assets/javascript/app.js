@@ -140,7 +140,7 @@ class game {
                     $("#triviaDiv").empty();
                     $("#triviaDiv").append("<h2>Game over!</h2>\
                     <ul><li>"+"Correct: " + _self.correct+"</li>\
-                    <li>"+"wrong: " + _self.wrong+"</li></ul>");
+                    <li>"+"Wrong: " + _self.wrong+"</li></ul>");
                     $("#correct").empty();
                     $("#wrong").empty();
                 }
@@ -161,7 +161,7 @@ class game {
 
         this.wrong++;
 
-        $("#wrong").text("wrong: " + this.wrong);
+        $("#wrong").text("Wrong: " + this.wrong);
 
     }
 
