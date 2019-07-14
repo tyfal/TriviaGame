@@ -44,7 +44,7 @@ class question {
 
             $("#optionList").empty();
 
-            var wrongAnswer = $("<h3>You're so dumb! This is the correct answer.</h3><p>" + this.answer + "</p>");
+            var wrongAnswer = $("<h3>That was wrong! This is the correct answer.</h3><p>" + this.answer + "</p>");
 
             $("#triviaDiv").append(wrongAnswer);
 
