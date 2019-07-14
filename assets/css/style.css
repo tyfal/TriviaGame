@@ -1,4 +1,6 @@
 body {
+  margin: 0;
+  padding: 0;
   background-image: url("../images/backgroundimg.jpg");
   font-family: 'Caudex', serif;
   color: silver;
@@ -41,6 +43,20 @@ h2 {
 
 h3 {
   font-size: 35px;
+}
+
+button {
+  position: fixed;
+  top: 35%;
+  left: 42.5%;
+  width: 15%;
+  background-color: transparent;
+  text-decoration: none;
+  border: 1px solid silver;
+  font-family: 'Caudex', serif;
+  font-size: 25px;
+  color: silver;
+  padding-bottom: 2.5px;
 }
 
 
