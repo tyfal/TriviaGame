@@ -142,7 +142,7 @@ class game {
                     $("#triviaDiv").empty();
                     $("#triviaDiv").append("<h2>Game over!</h2>\
                     <ul><li>Correct: " + _self.correct+"</li>\
-                    <li>=Wrong: " + _self.wrong+"</li></ul>");
+                    <li>Wrong: " + _self.wrong+"</li></ul>");
                     $("#correct").empty();
                     $("#wrong").empty();
                     $("#triviaDiv").append("<button id='start-btn' onclick='new game()'>Start Trivia Game</button>");
